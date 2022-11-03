@@ -40,16 +40,23 @@ function playRound(userChoice, compChoice) {
             console.log("You lose! Rock beats scissors");
         }
         else console.log("You won! Scissors beat paper");
-    };
+    }
+    else alert("Wrong! Choose either paper, scissors, or rock!")
 };
 
-// Get the computers choice
-const compChoice = getComputerChoice();
 
-// ask the user for an input 
-const userChoice = prompt("Paper, scissors, or rock?");
 
-playRound(userChoice, compChoice);
+
+for (let i = 0; i < 5; i++) {
+    // Get the computers choice
+    const compChoice = getComputerChoice();
+
+    // ask the user for an input 
+    const userChoice = prompt("Paper, scissors, or rock?");
+    
+    playRound(userChoice, compChoice);
+}
+
 
 // if the input is not rock, paper, or scissors
 // tell the user to pick again
