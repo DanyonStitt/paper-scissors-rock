@@ -5,6 +5,7 @@ function getComputerChoice() {
 
     // Randomly generate an index within the length of the array
     const randIndex = Math.floor(Math.random() * compChoices.length);
+    console.log(compChoices[randIndex]);
 
     // Select the choice at that index
     return compChoices[randIndex];
@@ -35,40 +36,21 @@ function playRound(userChoice, compChoice) {
     else return "Wrong! Choose either paper, scissors, or rock!";
 };
 
-function game() {
-    // Set a counter for the number of wins and loses
-    let wins = 0;
-    let loses = 0;
-    alert("Playing best of 5 games");
-    // Play 5 rounds of the game
-    for (let i = 0; i < 5; i++) {
-        // Get the computers choice
-        const compChoice = getComputerChoice();
-        // ask the user for an input 
-        const userChoice = prompt("Paper, scissors, or rock?");
-        // Play the game
-        let gameResult = playRound(userChoice, compChoice);
-        console.log(gameResult);
-        if (gameResult.toLowerCase().includes("you win!")) {
-            wins = wins + 1;
-        }
-        else if (gameResult.toLowerCase().includes("you lose!")) {
-            loses = loses + 1
-        };
-        console.log(gameResult)
-    };
-    // showing the final winner
-    if (wins > loses) {
-        console.log("Well done! you won " + wins + " to " + loses);
-    }
-    else if (loses > wins) {
-        console.log("Haha! I win " + loses + " to " + wins);
-    }
-    else console.log("Play me again!");
+
+function playGame(e) {
+    let userChoice = e.target.id;
+    console.log(userChoice)
+    let compChoice = getComputerChoice();
+    print(compChoice)
+    playRound(userChoice, compChoice);
 }
 
+const rock = document.querySelector("#rock");
+rock.addEventListener("click", playGame);
 
-game()
+// console.log(buttons);
+
+// game()
 
 
 
