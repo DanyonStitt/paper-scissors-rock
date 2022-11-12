@@ -5,7 +5,6 @@ function getComputerChoice() {
 
     // Randomly generate an index within the length of the array
     const randIndex = Math.floor(Math.random() * compChoices.length);
-    console.log(compChoices[randIndex]);
 
     // Select the choice at that index
     return compChoices[randIndex];
@@ -24,7 +23,7 @@ function playRound(userChoice, compChoice) {
     }
     // If the user chooses paper
     else if(userChoice.toLowerCase() === "paper") {
-        if (compChoice === "rock") {"You won! Paper beats rock";}
+        if (compChoice === "rock") {return "You won! Paper beats rock";}
         else return "You lose! scissors beat paper";
     }
     // If the user chooses scissors
@@ -39,14 +38,16 @@ function playRound(userChoice, compChoice) {
 
 function playGame(e) {
     let userChoice = e.target.id;
-    console.log(userChoice)
+    
     let compChoice = getComputerChoice();
-    print(compChoice)
-    playRound(userChoice, compChoice);
+    let result = playRound(userChoice, compChoice);
+    console.log(userChoice, compChoice, result)
 }
 
-const rock = document.querySelector("#rock");
-rock.addEventListener("click", playGame);
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click", playGame);
+});
 
 // console.log(buttons);
 
