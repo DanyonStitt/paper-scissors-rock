@@ -11,7 +11,7 @@ function getComputerChoice() {
 };
 
 // Compare the players choice to the computers choice
-function playRound(userChoice, compChoice) {
+function getResult(userChoice, compChoice) {
     // If both player and user make the same guess
     if (userChoice.toLowerCase() === compChoice) {
         return "It's a draw! You both chose " + compChoice;
@@ -36,24 +36,56 @@ function playRound(userChoice, compChoice) {
 };
 
 
-function playGame(e) {
-    let userChoice = e.target.id;
+function playRound(playerChoice, computerChoice) {
+    let result = getResult(playerChoice, computerChoice);
+    gameResult.textContent = result;
+
+    if(result.toLowerCase().includes("you won")) {
+        playerScore++;
+    } else if(result.toLowerCase().includes("you lose")) {
+        computerScore++;
+    };
+
+    userScore.textContent = playerScore;
+    compScore.textContent = computerScore;
+};
+
+function declareWinner() {
+    if(playerScore > computerScore) {
+        gameResult.textContent = "You won!";
+    } else gameResult.textContent = "You lost!";
+
     
-    let compChoice = getComputerChoice();
-    let result = playRound(userChoice, compChoice);
-    console.log(userChoice, compChoice, result)
 }
+
+let computerScore = 0;
+let playerScore = 0;
+
+results = document.querySelector("#results");
+const gameResult = document.createElement("div");
+gameResult.classList.add("user-choice");
+results.appendChild(gameResult);
+
+const userScore = document.createElement("div");
+userScore.classList.add("player-score");
+results.appendChild(userScore);
+
+const compScore = document.createElement("div");
+compScore.classList.add("computer-score");
+results.appendChild(compScore);
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
-    button.addEventListener("click", playGame);
+    button.addEventListener("click", () => {
+        const playerChoice = button.id;
+        const computerChoice = getComputerChoice();
+        playRound(playerChoice, computerChoice);
+
+        if(playerScore === 5 || computerScore === 5) {
+            declareWinner();
+            computerScore = 0;
+            playerScore = 0;
+        };
+
+    });
 });
-
-// console.log(buttons);
-
-// game()
-
-
-
-// 
-// 
